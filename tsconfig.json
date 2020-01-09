@@ -1,0 +1,24 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "lib",
+		"target": "ESNext",
+		"module": "UMD",
+		"lib": ["esnext", "dom"],
+		"strict": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"declaration": false,
+		"noImplicitAny": false,
+		"sourceMap": true,
+		"downlevelIteration": true,
+		"newLine": "lf",
+		"noUnusedLocals": true,
+		"experimentalDecorators": true
+	},
+	"include": ["src", "functions/server"]
+}
