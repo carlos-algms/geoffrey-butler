@@ -29,6 +29,7 @@ module.exports = {
 		'import/no-named-as-default': 'off',
 		'import/prefer-default-export': 'off',
 		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+		'import/extensions': 'off',
 		'jest/no-mocks-import': 'off',
 		'no-plusplus': 'off',
 		'brace-style': 'off',

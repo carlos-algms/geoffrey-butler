@@ -3,7 +3,7 @@
 		"baseUrl": "./",
 		"outDir": "lib",
 		"target": "ESNext",
-		"module": "UMD",
+		"module": "CommonJS",
 		"lib": ["esnext", "dom"],
 		"strict": true,
 		"skipLibCheck": true,
