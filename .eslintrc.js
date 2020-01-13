@@ -12,13 +12,16 @@ module.exports = {
 	],
 	plugins: ['prettier', 'jest', '@typescript-eslint'],
 	settings: {
+		'import/parsers': {
+			'@typescript-eslint/parser': ['.ts', '.tsx'],
+		},
 		'import/resolver': {
 			node: {
 				extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css'],
 			},
 			typescript: {
 				alwaysTryTypes: true,
-				directory: './tsconfig.json',
+				directory: './',
 			},
 		},
 	},
@@ -45,6 +48,7 @@ module.exports = {
 		'@typescript-eslint/explicit-function-return-type': ['off'],
 		'@typescript-eslint/no-var-requires': ['off'],
 		'@typescript-eslint/ban-ts-ignore': ['off'],
+		'@typescript-eslint/camelcase': 'off',
 	},
 	overrides: [
 		{
