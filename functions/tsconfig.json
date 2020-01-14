@@ -7,5 +7,5 @@
 		"target": "ES2018"
 	},
 	"compileOnSave": true,
-	"include": ["server"]
+	"include": ["server", "../src"]
 }

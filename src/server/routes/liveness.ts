@@ -1,5 +1,7 @@
-import { Express } from 'express';
+import { Router } from 'express';
 
-export default (webserver: Express) => {
-	webserver.get('/liveness', (req, res) => res.json({ live: true }));
-};
+const route = Router();
+
+route.get('/', (req, res) => res.json({ live: true }));
+
+export default route;

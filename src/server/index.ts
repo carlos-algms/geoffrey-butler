@@ -1,6 +1,9 @@
 import webserver from './webserver';
-import livenessRoute from './routes/liveness';
 
-livenessRoute(webserver);
+const PORT = 3000;
+
+webserver.listen(PORT, () => {
+	console.log(`webserver running on port ${PORT}`);
+});
 
 export { webserver };

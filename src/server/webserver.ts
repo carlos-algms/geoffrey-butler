@@ -1,15 +1,13 @@
-import express from 'express';
 import bodyParser from 'body-parser';
-
-const PORT = 3000;
+import cors from 'cors';
+import express from 'express';
+import livenessRoute from './routes/liveness';
 
 const webserver = express();
 
+webserver.use(cors({ origin: true }));
 webserver.use(bodyParser.json());
 webserver.use(bodyParser.urlencoded({ extended: true }));
-
-webserver.listen(PORT, () => {
-	console.log(`webserver running on port ${PORT}`);
-});
+webserver.use('/liveness', livenessRoute);
 
 export default webserver;
