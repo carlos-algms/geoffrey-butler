@@ -1,11 +1,24 @@
 {
-	"extends": "../tsconfig.json",
 	"compilerOptions": {
+		"baseUrl": "./",
 		"module": "commonjs",
 		"outDir": "lib",
+		"target": "ES2018",
+		"strict": true,
+		"skipLibCheck": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"declaration": false,
+		"noImplicitAny": false,
 		"sourceMap": true,
-		"target": "ES2018"
+		"downlevelIteration": true,
+		"newLine": "lf",
+		"noUnusedLocals": true,
+		"experimentalDecorators": true
 	},
 	"compileOnSave": true,
-	"include": ["server", "../src"]
+	"include": ["server"]
 }

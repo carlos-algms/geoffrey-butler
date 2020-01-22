@@ -54,7 +54,7 @@ module.exports = {
 		{
 			files: ['*.ts', '*.tsx'],
 			parserOptions: {
-				project: './tsconfig.json',
+				project: ['./tsconfig.json', './functions/tsconfig.json'],
 			},
 			rules: {
 				// https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/FAQ.md#eslint-plugin-import

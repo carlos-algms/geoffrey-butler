@@ -1,0 +1,9 @@
+.vscode
+functions
+node_modules
+.huskyrc.js
+.lintstagedrc.js
+.firebaserc
+firebase.json
+nodemon.json
+tsconfig.json

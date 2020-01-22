@@ -20,7 +20,7 @@
 		"noUnusedLocals": true,
 		"experimentalDecorators": true
 	},
-	"include": ["src", "functions/server"],
+	"include": ["src"],
 	"exclude": [
 		".vscode",
 		"node_modules",

@@ -1,5 +1,9 @@
 {
 	"functions": {
-		"predeploy": ["npx eslint \"functions/src/**\"", "npm --prefix \"$RESOURCE_DIR\" run build"]
+		"predeploy": [
+			"npx eslint \"functions/server/**\"",
+			"npm --prefix \"$RESOURCE_DIR\" run build",
+			"npm run buildForFunctions"
+		]
 	}
 }
