@@ -6,7 +6,8 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "TS_NODE_FILES=true nodemon -e ts,tsx --watch src/ --exec ts-node --project tsconfig.json src/server/index.ts",
-		"buildForFunctions": "tsc --outDir ./functions/lib"
+		"buildForFunctions": "tsc --outDir ./functions/lib",
+		"build": "rm -rf ./build && tsc --outDir ./build"
 	},
 	"keywords": [],
 	"author": "",

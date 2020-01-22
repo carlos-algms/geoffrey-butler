@@ -1,6 +1,6 @@
 import webserver from './webserver';
 
-const PORT = 3000;
+const PORT = 80;
 
 webserver.listen(PORT, () => {
 	console.log(`webserver running on port ${PORT}`);
