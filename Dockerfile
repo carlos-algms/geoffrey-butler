@@ -1,8 +1,6 @@
 FROM node:12
 EXPOSE 80 443
 
-ADD . /geoffrey/
-
 WORKDIR geoffrey
 
 ENV HUSKY_SKIP_INSTALL 1
@@ -47,15 +45,21 @@ RUN apt-get update \
 			lsb-release \
 			xdg-utils \
 			wget \
-		&& npm ci \
-		&& npm run build \
-		&& npm cache clean --force \
 		&& rm -rf /var/cache/debconf/*-old \
 		&& rm -rf /usr/share/doc/* \
 		&& rm -rf /var/lib/apt/lists/* \
 		&& rm -rf /var/cache/apt/*
 
 
+COPY package*.json /geoffrey/
+
+RUN npm ci \
+		&& npm cache clean --force
+
+COPY . /geoffrey/
+
 ENV NODE_ENV production
+
+RUN npm run build
 
 CMD ["node", "./build/server/index.js"]
