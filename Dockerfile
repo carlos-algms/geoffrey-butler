@@ -1,9 +1,4 @@
 FROM node:12
-EXPOSE 80 443
-
-WORKDIR geoffrey
-
-ENV HUSKY_SKIP_INSTALL 1
 
 RUN apt-get update \
 		&& apt-get install --no-install-recommends --no-install-suggests -y \
@@ -51,15 +46,18 @@ RUN apt-get update \
 		&& rm -rf /var/cache/apt/*
 
 
-COPY package*.json /geoffrey/
+WORKDIR geoffrey
 
+COPY package*.json ./
+
+ENV HUSKY_SKIP_INSTALL 1
 RUN npm ci \
 		&& npm cache clean --force
 
-COPY . /geoffrey/
-
+COPY . ./
 ENV NODE_ENV production
-
 RUN npm run build
+
+EXPOSE 80 443
 
 CMD ["node", "./build/server/index.js"]
