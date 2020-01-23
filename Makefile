@@ -1,4 +1,13 @@
 IMAGE=geoffrey
 
 docker:
-	docker build -t $(IMAGE):latest .
+	docker build --rm -t $(IMAGE):latest .
+
+publish:
+	heroku container:push web
+
+publish_node:
+	git push heroku master
+
+release:
+	heroku container:release web

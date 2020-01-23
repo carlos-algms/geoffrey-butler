@@ -2,7 +2,7 @@
 	"name": "geoffrey-butler",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "build/server/index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "TS_NODE_FILES=true nodemon -e ts,tsx --watch src/ --exec ts-node --project tsconfig.json src/server/index.ts",
@@ -10,8 +10,14 @@
 		"build": "rm -rf ./build && tsc --outDir ./build",
 		"start": "node build/server/index.js"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": [
+		"bot",
+		"automation"
+	],
+	"author": "Carlos Gomes <carlos.algms@gmail.com>",
+	"engines": {
+		"node": "12"
+	},
 	"license": "ISC",
 	"dependencies": {
 		"body-parser": "^1.19.0",
