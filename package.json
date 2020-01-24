@@ -1,7 +1,9 @@
 {
 	"name": "geoffrey-butler",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A personal multi purpose bot",
+	"author": "Carlos Gomes (https://github.com/carlos-algms)",
+	"license": "ISC",
 	"main": "build/server/index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -10,15 +12,6 @@
 		"build": "rm -rf ./build && tsc --outDir ./build",
 		"start": "node build/server/index.js"
 	},
-	"keywords": [
-		"bot",
-		"automation"
-	],
-	"author": "Carlos Gomes <carlos.algms@gmail.com>",
-	"engines": {
-		"node": "12"
-	},
-	"license": "ISC",
 	"dependencies": {
 		"body-parser": "^1.19.0",
 		"cors": "^2.8.5",
@@ -45,5 +38,16 @@
 		"rimraf": "^3.0.0",
 		"ts-node": "^8.6.2",
 		"typescript": "^3.7.5"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/carlos-algms/geoffrey-butler.git"
+	},
+	"keywords": [
+		"bot",
+		"automation"
+	],
+	"engines": {
+		"node": "12"
 	}
 }
