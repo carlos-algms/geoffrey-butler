@@ -1,63 +1,65 @@
-FROM node:12
+FROM alpine:latest
 
-RUN apt-get update \
-		&& apt-get install --no-install-recommends --no-install-suggests -y \
-			gconf-service \
-			libxext6 \
-			libxfixes3 \
-			libxi6 \
-			libxrandr2 \
-			libxrender1 \
-			libcairo2 \
-			libcups2 \
-			libdbus-1-3 \
-			libexpat1 \
-			libfontconfig1 \
-			libgcc1 \
-			libgconf-2-4 \
-			libgdk-pixbuf2.0-0 \
-			libglib2.0-0 \
-			libgtk-3-0 \
-			libnspr4 \
-			libpango-1.0-0 \
-			libpangocairo-1.0-0 \
-			libstdc++6 \
-			libx11-6 \
-			libx11-xcb1 \
-			libxcb1 \
-			libxcomposite1 \
-			libxcursor1 \
-			libxdamage1 \
-			libxss1 \
-			libxtst6 \
-			libappindicator1 \
-			libnss3 \
-			libasound2 \
-			libatk1.0-0 \
-			libc6 \
-			ca-certificates \
-			fonts-liberation \
-			lsb-release \
-			xdg-utils \
-			wget \
-		&& rm -rf /var/cache/debconf/*-old \
-		&& rm -rf /usr/share/doc/* \
-		&& rm -rf /var/lib/apt/lists/* \
-		&& rm -rf /var/cache/apt/*
+USER root
+# Installs latest Chromium package.
+RUN set -ex \
+		&& echo @edge http://nl.alpinelinux.org/alpine/edge/community > /etc/apk/repositories \
+		&& echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
+		&& apk add --no-cache \
+			nodejs@edge \
+			nodejs-npm@edge \
+			chromium@edge \
+			ttf-freefont@edge \
+			freetype@edge \
+			libstdc++@edge \
+			harfbuzz@edge \
+			nss@edge \
+			tini@edge \
+			# make@edge \
+			# gcc@edge \
+			# g++@edge \
+			# python@edge \
+			# git@edge \
+		# && apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing wqy-zenhei \
+		&& rm -rf \
+			/var/cache/* \
+			/var/lib/apt/lists/* \
+			/usr/share/man \
+			/tmp/* \
+		&& mkdir /var/cache/apk \
+		# Add Chrome as a user
+		&& mkdir -p /usr/src/app \
+		&& adduser -D chrome \
+		&& chown -R chrome:chrome /usr/src/app
 
+# Run Chrome as non-privileged
+USER chrome
+WORKDIR /usr/src/app
 
-WORKDIR geoffrey
+ENV CHROME_BIN=/usr/bin/chromium-browser \
+		CHROME_PATH=/usr/lib/chromium/ \
+		PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1 \
+		PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
+		HUSKY_SKIP_INSTALL=1 \
+		CI=1
 
-COPY package*.json ./
+COPY ["package*.json", "./"]
 
-ENV HUSKY_SKIP_INSTALL 1
-RUN npm ci \
+RUN echo "Node version: $(node -v)" \
+		&& echo "NPM version: $(npm -v)" \
+		&& npm ci \
 		&& npm cache clean --force
 
-COPY . ./
-ENV NODE_ENV production
-RUN npm run build
+COPY ["src/", "./src/"]
+COPY ["tsconfig.json", "./"]
 
-EXPOSE 80 443
+ENV NODE_ENV production
+RUN set -ex \
+		&& npm run build \
+		&& npm prune
+
+EXPOSE 80 443 3000
+
+ENTRYPOINT ["tini", "--"]
 
 CMD ["node", "./build/server/index.js"]
