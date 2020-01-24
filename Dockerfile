@@ -43,15 +43,18 @@ ENV CHROME_BIN=/usr/bin/chromium-browser \
 		HUSKY_SKIP_INSTALL=1 \
 		CI=1
 
-COPY ["package*.json", "./"]
+COPY --chown=chrome ["package*.json", "./"]
 
-RUN echo "Node version: $(node -v)" \
+RUN echo "Who am I? '$(whoami)'" \
+		&& echo "Node version: $(node -v)" \
 		&& echo "NPM version: $(npm -v)" \
+		&& echo "Current dir: $(pwd)" \
+		&& ls -la \
 		&& npm ci \
 		&& npm cache clean --force
 
-COPY ["src/", "./src/"]
-COPY ["tsconfig.json", "./"]
+COPY --chown=chrome ["src/", "./src/"]
+COPY --chown=chrome ["tsconfig.json", "./"]
 
 ENV NODE_ENV production
 RUN set -ex \
