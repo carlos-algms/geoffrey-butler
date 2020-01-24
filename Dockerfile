@@ -58,8 +58,9 @@ COPY --chown=chrome ["tsconfig.json", "./"]
 
 ENV NODE_ENV production
 RUN set -ex \
-		&& npm run build \
-		&& npm prune
+		&& npm run build
+
+COPY --chown=chrome ["static/", "./static/"]
 
 EXPOSE 80 443 3000
 
