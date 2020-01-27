@@ -1,13 +1,11 @@
 import puppeteer from 'puppeteer';
 
 export const launchPage = async (url?: string) => {
-	// Launch a browser
 	const browser = await puppeteer.launch({
 		headless: true,
-		args: ['--no-sandbox', '--disable-setuid-sandbox'],
+		args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
 	});
 
-	// Visit the page a get content
 	const page = await browser.newPage();
 
 	if (url) {
