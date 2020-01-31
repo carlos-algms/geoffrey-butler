@@ -1,4 +1,6 @@
-.vscode
+.git/
+.github/
+.vscode/
 functions
 node_modules
 .huskyrc.js
